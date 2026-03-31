@@ -183,6 +183,14 @@ function inputNumber(num) {
     // 완성 체크
     if (isGridComplete()) {
         stopTimer();
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_complete', {
+                game_type: 'sudoku',
+                difficulty: currentDifficulty,
+                time_spent: seconds,
+                mistakes: mistakes
+            });
+        }
         setTimeout(() => {
             alert(`🎉 축하합니다! ${formatTime(seconds)}에 완료했습니다!`);
         }, 300);

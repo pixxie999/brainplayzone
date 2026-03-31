@@ -9,6 +9,10 @@ function openGame(gameType) {
     } else if (gameType === '2048') {
         new2048Game();
     }
+
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_start', { game_type: gameType });
+    }
 }
 
 function closeGame(gameType) {

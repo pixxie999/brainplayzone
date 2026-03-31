@@ -103,14 +103,26 @@ function move(direction) {
         updateScore();
         
         if (checkWin()) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_complete', {
+                    game_type: '2048',
+                    score: score2048
+                });
+            }
             setTimeout(() => {
                 alert('🎉 축하합니다! 2048 타일을 만들었습니다!\n계속 플레이할 수 있습니다.');
             }, 300);
         }
-        
+
         if (checkGameOver()) {
             gameOver = true;
             saveBestScore();
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_over', {
+                    game_type: '2048',
+                    score: score2048
+                });
+            }
             setTimeout(() => {
                 alert(`게임 오버! 최종 점수: ${score2048}`);
             }, 300);
