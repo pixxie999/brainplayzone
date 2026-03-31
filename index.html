@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="무료 두뇌 게임 포털 - 스도쿠, 2048 등 재미있는 퍼즐 게임을 무료로 즐기세요">
+    <meta name="keywords" content="무료 게임, 스도쿠, 2048, 두뇌 게임, 퍼즐, 무료 스도쿠, 2048 게임">
+    <meta property="og:title" content="브레인 플레이존 - 무료 두뇌 게임">
+    <meta property="og:description" content="스도쿠, 2048 등 재미있는 두뇌 게임을 무료로 즐기세요">
+    <meta property="og:type" content="website">
+    <title>브레인 플레이존 - 무료 두뇌 게임 | 스도쿠, 2048</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <div class="logo">🧠 브레인 플레이존</div>
+            <ul class="nav-links">
+                <li><a href="#games">게임</a></li>
+                <li><a href="#about">소개</a></li>
+                <li><a href="#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>무료 두뇌 게임으로<br>즐겁게 트레이닝하세요</h1>
+            <p>스도쿠, 2048 등 재미있는 퍼즐 게임을 언제 어디서나 무료로 즐기세요</p>
+            <a href="#games" class="cta-button">지금 바로 플레이 →</a>
+        </div>
+    </section>
+
+    <!-- 게임 섹션 -->
+    <section class="games-section" id="games">
+        <h2 class="section-title">인기 게임</h2>
+        <div class="games-grid">
+            <!-- 스도쿠 카드 -->
+            <div class="game-card" onclick="openGame('sudoku')">
+                <div class="game-header">
+                    <div class="game-icon">🔢</div>
+                    <h3 class="game-title">스도쿠</h3>
+                    <p class="game-subtitle">클래식 숫자 퍼즐</p>
+                </div>
+                <div class="game-body">
+                    <p class="game-description">
+                        9×9 격자를 숫자로 채워 각 행, 열, 3×3 구역이 1~9까지 모두 포함하도록 하는 논리 퍼즐입니다.
+                    </p>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">난이도</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">15분</div>
+                            <div class="stat-label">평균 시간</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">★4.8</div>
+                            <div class="stat-label">평점</div>
+                        </div>
+                    </div>
+                    <button class="play-button">플레이하기</button>
+                </div>
+            </div>
+
+            <!-- 2048 카드 -->
+            <div class="game-card" onclick="openGame('2048')">
+                <div class="game-header">
+                    <div class="game-icon">🎯</div>
+                    <h3 class="game-title">2048</h3>
+                    <p class="game-subtitle">중독성 타일 게임</p>
+                </div>
+                <div class="game-body">
+                    <p class="game-description">
+                        같은 숫자의 타일을 합쳐 2048 타일을 만드는 퍼즐 게임입니다. 간단하지만 전략적인 재미!
+                    </p>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">난이도</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10분</div>
+                            <div class="stat-label">평균 시간</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">★4.9</div>
+                            <div class="stat-label">평점</div>
+                        </div>
+                    </div>
+                    <button class="play-button">플레이하기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 스도쿠 게임 모달 -->
+    <div class="game-modal" id="sudoku-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">스도쿠</h3>
+                <button class="close-button" onclick="closeGame('sudoku')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-controls">
+                    <div class="difficulty-selector">
+                        <button class="difficulty-btn active" onclick="changeDifficulty('easy')">쉬움</button>
+                        <button class="difficulty-btn" onclick="changeDifficulty('medium')">보통</button>
+                        <button class="difficulty-btn" onclick="changeDifficulty('hard')">어려움</button>
+                    </div>
+                    <div class="game-info">
+                        <div class="info-item">
+                            <div class="info-label">실수</div>
+                            <div class="info-value" id="mistakes">0</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">시간</div>
+                            <div class="info-value" id="timer">00:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sudoku-grid" id="sudoku-grid"></div>
+
+                <div class="number-pad">
+                    <button class="number-btn" onclick="inputNumber(1)">1</button>
+                    <button class="number-btn" onclick="inputNumber(2)">2</button>
+                    <button class="number-btn" onclick="inputNumber(3)">3</button>
+                    <button class="number-btn" onclick="inputNumber(4)">4</button>
+                    <button class="number-btn" onclick="inputNumber(5)">5</button>
+                    <button class="number-btn" onclick="inputNumber(6)">6</button>
+                    <button class="number-btn" onclick="inputNumber(7)">7</button>
+                    <button class="number-btn" onclick="inputNumber(8)">8</button>
+                    <button class="number-btn" onclick="inputNumber(9)">9</button>
+                    <button class="number-btn" onclick="inputNumber(0)">지우기</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn btn-new" onclick="newSudokuGame()">새 게임</button>
+                    <button class="action-btn btn-hint" onclick="getHint()">힌트</button>
+                    <button class="action-btn btn-check" onclick="checkSolution()">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2048 게임 모달 -->
+    <div class="game-modal" id="2048-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">2048</h3>
+                <button class="close-button" onclick="closeGame('2048')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-controls">
+                    <div class="game-info">
+                        <div class="info-item">
+                            <div class="info-label">점수</div>
+                            <div class="info-value" id="score-2048">0</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">최고점</div>
+                            <div class="info-value" id="best-2048">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-2048-grid" id="grid-2048"></div>
+
+                <div style="text-align: center; color: #666; margin-bottom: 1rem;">
+                    ⌨️ 화살표 키 또는 스와이프로 타일을 이동하세요
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn btn-new" onclick="new2048Game()">새 게임</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="#" onclick="openGame('sudoku')">스도쿠</a></li>
+                    <li><a href="#" onclick="openGame('2048')">2048</a></li>
+                    <li><a href="#">넌그램 (출시 예정)</a></li>
+                    <li><a href="#">미로 탈출 (출시 예정)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="js/sudoku-game.js"></script>
+    <script src="js/2048-game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
