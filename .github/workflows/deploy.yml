@@ -13,7 +13,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 141.164.61.123
-          username: pixxie
+          username: master
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
