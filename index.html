@@ -22,7 +22,7 @@
             <div class="logo">🧠 브레인 플레이존</div>
             <ul class="nav-links">
                 <li><a href="#games">게임</a></li>
-                <li><a href="#about">소개</a></li>
+                <li><a href="guide.html">소개</a></li>
                 <li><a href="#ranking">랭킹</a></li>
             </ul>
         </nav>
@@ -185,6 +185,42 @@
         </div>
     </div>
 
+    <!-- 랭킹 섹션 -->
+    <section class="ranking-section" id="ranking">
+        <h2 class="section-title">명예의 전당</h2>
+        <div class="ranking-tabs">
+            <button class="ranking-tab active" onclick="showRanking('sudoku')">스도쿠</button>
+            <button class="ranking-tab" onclick="showRanking('2048')">2048</button>
+        </div>
+        <div class="ranking-table-wrap">
+            <table class="ranking-table" id="ranking-sudoku">
+                <thead>
+                    <tr><th>순위</th><th>닉네임</th><th>기록</th><th>난이도</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>🥇 1</td><td>두뇌왕</td><td>03:12</td><td>어려움</td></tr>
+                    <tr><td>🥈 2</td><td>퍼즐마스터</td><td>04:55</td><td>어려움</td></tr>
+                    <tr><td>🥉 3</td><td>숫자천재</td><td>05:30</td><td>보통</td></tr>
+                    <tr><td>4</td><td>논리왕</td><td>06:14</td><td>보통</td></tr>
+                    <tr><td>5</td><td>집중력갑</td><td>07:02</td><td>쉬움</td></tr>
+                </tbody>
+            </table>
+            <table class="ranking-table" id="ranking-2048" style="display:none;">
+                <thead>
+                    <tr><th>순위</th><th>닉네임</th><th>점수</th><th>최고 타일</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>🥇 1</td><td>합치기고수</td><td>98,420</td><td>4096</td></tr>
+                    <tr><td>🥈 2</td><td>타일킹</td><td>72,580</td><td>2048</td></tr>
+                    <tr><td>🥉 3</td><td>전략가</td><td>61,200</td><td>2048</td></tr>
+                    <tr><td>4</td><td>수학천재</td><td>54,380</td><td>1024</td></tr>
+                    <tr><td>5</td><td>두뇌파워</td><td>48,910</td><td>1024</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="ranking-notice">* 현재 데모 데이터입니다. 실제 랭킹 기능은 준비 중입니다.</p>
+    </section>
+
     <!-- 푸터 -->
     <footer>
         <div class="footer-content">
@@ -204,8 +240,8 @@
             <div class="footer-section">
                 <h3>정보</h3>
                 <ul>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="#ranking">랭킹</a></li>
                     <li><a href="#">문의하기</a></li>
                 </ul>
             </div>

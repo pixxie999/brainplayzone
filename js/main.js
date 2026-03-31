@@ -27,6 +27,16 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// 랭킹 탭 전환
+function showRanking(type) {
+    document.getElementById('ranking-sudoku').style.display = type === 'sudoku' ? 'table' : 'none';
+    document.getElementById('ranking-2048').style.display = type === '2048' ? 'table' : 'none';
+
+    document.querySelectorAll('.ranking-tab').forEach((btn, i) => {
+        btn.classList.toggle('active', (i === 0 && type === 'sudoku') || (i === 1 && type === '2048'));
+    });
+}
+
 // Google Analytics (GA4) - 실제 사용 시 측정 ID 변경 필요
 // window.dataLayer = window.dataLayer || [];
 // function gtag(){dataLayer.push(arguments);}
