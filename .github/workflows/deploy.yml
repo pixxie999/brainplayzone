@@ -12,13 +12,13 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 141.164.61.123
-          username: master_byqgfvytgg
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            git config --global --add safe.directory /home/1482947.cloudwaysapps.com/opwjxoqnte/public_html
-            cd /home/1482947.cloudwaysapps.com/opwjxoqnte/public_html
+            git config --global --add safe.directory ${{ secrets.DEPLOY_PATH }}
+            cd ${{ secrets.DEPLOY_PATH }}
             git init
             git remote remove origin 2>/dev/null || true
             git remote add origin "https://pixxie999:${{ secrets.GH_TOKEN }}@github.com/pixxie999/brainplayzone.git"
