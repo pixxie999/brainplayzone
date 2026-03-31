@@ -17,7 +17,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/master/applications/opwjxoqnte/public_html
+            git config --global --add safe.directory /home/1482947.cloudwaysapps.com/opwjxoqnte/public_html
+            cd /home/1482947.cloudwaysapps.com/opwjxoqnte/public_html
             if [ ! -d ".git" ]; then
               git init
               git remote add origin git@github.com:pixxie999/brainplayzone.git
