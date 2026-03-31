@@ -24,3 +24,8 @@ jobs:
             git remote add origin "https://pixxie999:${{ secrets.GH_TOKEN }}@github.com/pixxie999/brainplayzone.git"
             git fetch origin main
             git reset --hard origin/main
+            # Varnish 캐시 퍼지
+            curl -s -X PURGE http://localhost/ 2>/dev/null || true
+            curl -s -X PURGE http://localhost/guide.html 2>/dev/null || true
+            # Nginx 캐시 디렉토리 초기화 (있는 경우)
+            find /var/cache/nginx -type f -delete 2>/dev/null || true
