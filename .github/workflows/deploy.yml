@@ -17,5 +17,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            find /home/master_byqgfvytgg -name "index.html" 2>/dev/null | head -5
-            ls /home/master_byqgfvytgg/
+            echo "HOME: $HOME"
+            echo "PWD: $(pwd)"
+            ls $HOME/
+            find $HOME -name "index.html" 2>/dev/null | head -10
