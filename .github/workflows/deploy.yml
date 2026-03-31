@@ -17,7 +17,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            echo "HOME: $HOME"
-            echo "PWD: $(pwd)"
-            ls $HOME/
-            find $HOME -name "index.html" 2>/dev/null | head -10
+            cd /home/master/applications/opwjxoqnte/public_html
+            if [ ! -d ".git" ]; then
+              git init
+              git remote add origin git@github.com:pixxie999/brainplayzone.git
+              git fetch origin main
+              git reset --hard origin/main
+            else
+              git pull origin main
+            fi
