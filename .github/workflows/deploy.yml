@@ -19,12 +19,8 @@ jobs:
           script: |
             git config --global --add safe.directory /home/1482947.cloudwaysapps.com/opwjxoqnte/public_html
             cd /home/1482947.cloudwaysapps.com/opwjxoqnte/public_html
-            REPO_URL="https://pixxie999:${{ secrets.GH_TOKEN }}@github.com/pixxie999/brainplayzone.git"
-            if [ ! -d ".git" ]; then
-              git init
-              git remote add origin "$REPO_URL"
-            else
-              git remote set-url origin "$REPO_URL"
-            fi
+            git init
+            git remote remove origin 2>/dev/null || true
+            git remote add origin "https://pixxie999:${{ secrets.GH_TOKEN }}@github.com/pixxie999/brainplayzone.git"
             git fetch origin main
             git reset --hard origin/main
