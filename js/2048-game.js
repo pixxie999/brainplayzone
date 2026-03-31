@@ -356,11 +356,8 @@ document.addEventListener('touchmove', (e) => {
     if (!document.getElementById('2048-modal').classList.contains('active')) {
         return;
     }
-    
-    // 2048 그리드 영역 안에서 발생한 터치 이벤트인 경우 스크롤을 방지
-    if (e.target.closest('#grid-2048')) {
-        e.preventDefault();
-    }
+    // 2048 모달이 열려있으면 모달 전체에서 스크롤 방지
+    e.preventDefault();
 }, { passive: false });
 
 document.addEventListener('touchend', (e) => {
