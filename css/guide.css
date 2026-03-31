@@ -245,6 +245,139 @@
     font-size: 1rem;
 }
 
+/* 전략 카드 */
+.strategy-card {
+    background: white;
+    border-left: 4px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.strategy-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 0.75rem;
+}
+
+.strategy-example {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.strategy-example code {
+    display: block;
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+    color: var(--secondary);
+}
+
+.strategy-tip {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0.5rem 0 0;
+}
+
+/* 단축키 표 */
+.shortcut-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.75rem 0 1.5rem;
+}
+
+.shortcut-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.95rem;
+}
+
+.shortcut-key {
+    background: var(--dark);
+    color: white;
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    min-width: 150px;
+    text-align: center;
+}
+
+/* 점수 표 */
+.score-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.75rem 0 1.5rem;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--light);
+}
+
+.score-row:last-child {
+    border-bottom: none;
+}
+
+.highlight-row {
+    background: #fff3e0;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+/* FAQ */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+    font-size: 1rem !important;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 0.6rem !important;
+}
+
+.faq-answer {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 !important;
+    line-height: 1.7;
+}
+
+/* diff-item span 여러 개 */
+.diff-item span {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
 /* 맨 위로 */
 .guide-back-top {
     text-align: right;
@@ -266,7 +399,7 @@
 /* 반응형 */
 @media (max-width: 768px) {
     .guide-hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     .guide-hero {
@@ -278,7 +411,7 @@
     }
 
     .guide-section-header h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     .difficulty-guide {
@@ -287,6 +420,24 @@
 
     .tips-grid {
         grid-template-columns: 1fr;
+    }
+
+    .strategy-card {
+        padding: 1rem 1.25rem;
+    }
+
+    .shortcut-key {
+        min-width: 120px;
+        font-size: 0.78rem;
+    }
+
+    .score-row {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .faq-item {
+        padding: 1rem 1.25rem;
     }
 }
 
