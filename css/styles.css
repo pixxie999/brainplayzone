@@ -27,6 +27,7 @@ body {
     color: var(--dark);
     line-height: 1.6;
     overflow-x: hidden;
+    word-break: keep-all;
 }
 
 /* 헤더 */
@@ -68,6 +69,7 @@ nav {
     font-weight: 500;
     transition: transform 0.2s;
     display: inline-block;
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -356,6 +358,7 @@ nav {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s;
+    white-space: nowrap;
 }
 
 .difficulty-btn.active {
@@ -386,7 +389,8 @@ nav {
 /* 스도쿠 그리드 */
 .sudoku-grid {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    grid-template-rows: repeat(9, minmax(0, 1fr));
     gap: 1px;
     background: var(--dark);
     border: 3px solid var(--dark);
@@ -438,7 +442,8 @@ nav {
 /* 2048 그리드 */
 .game-2048-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
     gap: 10px;
     background: #bbada0;
     padding: 10px;
@@ -446,6 +451,7 @@ nav {
     margin: 0 auto 1.5rem;
     max-width: 400px;
     aspect-ratio: 1;
+    touch-action: none;
 }
 
 .tile-2048 {
@@ -476,7 +482,7 @@ nav {
 /* 키패드 */
 .number-pad {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0.5rem;
     max-width: 450px;
     margin: 0 auto 1rem;
@@ -749,6 +755,7 @@ footer {
     /* 게임 컨트롤 세로 정렬 */
     .game-controls {
         flex-direction: column;
+        align-items: stretch;
         gap: 0.75rem;
         padding: 0.75rem;
     }
@@ -785,7 +792,7 @@ footer {
     }
 
     .number-btn {
-        padding: 0.75rem 0.5rem;
+        padding: 0.75rem 0.2rem;
         font-size: 1.1rem;
         min-height: 48px;
     }

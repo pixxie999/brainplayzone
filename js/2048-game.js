@@ -350,7 +350,18 @@ document.addEventListener('touchstart', (e) => {
     
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
-}, false);
+}, { passive: false });
+
+document.addEventListener('touchmove', (e) => {
+    if (!document.getElementById('2048-modal').classList.contains('active')) {
+        return;
+    }
+    
+    // 2048 그리드 영역 안에서 발생한 터치 이벤트인 경우 스크롤을 방지
+    if (e.target.closest('#grid-2048')) {
+        e.preventDefault();
+    }
+}, { passive: false });
 
 document.addEventListener('touchend', (e) => {
     if (!document.getElementById('2048-modal').classList.contains('active')) {
