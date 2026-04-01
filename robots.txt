@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# 사이트맵
+Sitemap: https://brainplayzone.com/sitemap.xml
+
+# 크롤링 제외할 페이지 (있다면)
+# Disallow: /admin/
+# Disallow: /api/
+
+# 검색엔진별 설정
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Bingbot
+Allow: /
