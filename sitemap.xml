@@ -4,7 +4,6 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- 메인 페이지 -->
   <url>
     <loc>https://brainplayzone.com/</loc>
     <lastmod>2026-03-30</lastmod>
@@ -12,7 +11,6 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- 게임 가이드 페이지 -->
   <url>
     <loc>https://brainplayzone.com/guide.html</loc>
     <lastmod>2026-03-30</lastmod>
@@ -20,13 +18,18 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- 향후 추가될 페이지들 (주석 처리)
   <url>
-    <loc>https://brainplayzone.com/blog/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://brainplayzone.com/privacy.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
-  -->
 
-</urlset>
+  <url>
+    <loc>https://brainplayzone.com/terms.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  </urlset>
