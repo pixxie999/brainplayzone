@@ -4,6 +4,11 @@ function openGame(gameType) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
+    // ✨ 여기에 3줄 추가! ✨
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_start', { 'game_type': gameType });
+    }
+
     if (gameType === 'sudoku') {
         newSudokuGame();
     } else if (gameType === '2048') {
