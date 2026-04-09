@@ -4,9 +4,13 @@ function openGame(gameType) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // ✨ 여기에 3줄 추가! ✨
+    // ✨ GA4 이벤트 (한 번만!)
     if (typeof gtag !== 'undefined') {
-        gtag('event', 'game_start', { 'game_type': gameType });
+        gtag('event', 'game_start', {
+            'game_type': gameType,
+            'game_name': gameType === 'sudoku' ? '스도쿠' : '2048'
+        });
+        console.log('🎮 Game Started:', gameType); // 디버깅용
     }
 
     if (gameType === 'sudoku') {
@@ -15,9 +19,6 @@ function openGame(gameType) {
         new2048Game();
     }
 
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'game_start', { game_type: gameType });
-    }
 }
 
 function closeGame(gameType) {
