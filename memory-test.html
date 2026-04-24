@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>기억력 테스트 - 브레인 플레이존</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="숫자 기억력 테스트. 잠깐 보이는 숫자를 기억하고 입력하는 두뇌 훈련 게임!">
+    <meta name="keywords" content="기억력 테스트, 숫자 기억, 두뇌 게임, 무료 게임, 기억력 훈련">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGSGCQ49');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/memory-test.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGSGCQ49" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🧠 브레인 플레이존</a>
+            <ul class="nav-links">
+                <li><a href="index.html#games">게임</a></li>
+                <li><a href="guide.html">소개</a></li>
+                <li><a href="index.html#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 게임 영역 -->
+    <main class="memory-test-main">
+        <div class="memory-test-card">
+            <div class="memory-test-header">
+                <div class="game-icon">🧠</div>
+                <h1 class="game-title">기억력 테스트</h1>
+                <p class="game-subtitle">잠깐 보이는 숫자를 기억하고 입력하세요!</p>
+            </div>
+
+            <div class="memory-test-body">
+                <div class="mt-number-box" id="mt-numberBox">READY</div>
+
+                <button class="mt-btn mt-btn-start" id="mt-startBtn">시작하기</button>
+
+                <input class="mt-input" id="mt-answerInput" type="text" inputmode="numeric"
+                    placeholder="숫자를 입력하세요" disabled>
+
+                <button class="mt-btn mt-btn-submit" id="mt-submitBtn" disabled>정답 확인</button>
+
+                <div class="mt-result" id="mt-result"></div>
+
+                <a href="index.html" class="back-link">← 게임 목록으로 돌아가기</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="index.html">스도쿠</a></li>
+                    <li><a href="index.html">2048</a></li>
+                    <li><a href="reaction-test.html">반응속도 테스트</a></li>
+                    <li><a href="roulette.html">커스텀 룰렛</a></li>
+                    <li><a href="balance-game.html">밸런스 게임</a></li>
+                    <li><a href="card-memory.html">카드 뒤집기</a></li>
+                    <li><a href="click-speed.html">10초 연타</a></li>
+                    <li><a href="memory-test.html">기억력 테스트</a></li>
+                    <li><a href="stroop-test.html">스트룹 테스트</a></li>
+                    <li><a href="timing-game.html">타이밍 맞추기</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="index.html#ranking">랭킹</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                    <li><a href="https://open.kakao.com/o/sORt2goi">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const numberBox = document.getElementById("mt-numberBox");
+        const startBtn = document.getElementById("mt-startBtn");
+        const submitBtn = document.getElementById("mt-submitBtn");
+        const answerInput = document.getElementById("mt-answerInput");
+        const resultEl = document.getElementById("mt-result");
+
+        let currentNumber = "";
+        let level = 1;
+        let bestLevel = Number(localStorage.getItem("memoryBestLevel")) || 0;
+
+        startBtn.addEventListener("click", startRound);
+        submitBtn.addEventListener("click", checkAnswer);
+        answerInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && !submitBtn.disabled) checkAnswer();
+        });
+
+        function startRound() {
+            const length = level + 2;
+            currentNumber = generateNumber(length);
+
+            numberBox.textContent = currentNumber;
+            resultEl.style.display = "none";
+
+            startBtn.disabled = true;
+            submitBtn.disabled = true;
+            answerInput.disabled = true;
+            answerInput.value = "";
+
+            const showTime = Math.max(900, 2200 - level * 150);
+
+            setTimeout(() => {
+                numberBox.textContent = "???";
+                answerInput.disabled = false;
+                submitBtn.disabled = false;
+                answerInput.focus();
+            }, showTime);
+        }
+
+        function checkAnswer() {
+            const userAnswer = answerInput.value.trim();
+            resultEl.style.display = "block";
+
+            if (userAnswer === currentNumber) {
+                level++;
+                if (level > bestLevel) {
+                    bestLevel = level;
+                    localStorage.setItem("memoryBestLevel", bestLevel);
+                }
+                resultEl.className = "mt-result correct";
+                resultEl.innerHTML = `정답입니다! 🎉<br>현재 레벨: ${level}&nbsp; / &nbsp;최고 레벨: ${bestLevel}`;
+                numberBox.textContent = "정답!";
+                startBtn.textContent = "다음 단계";
+            } else {
+                resultEl.className = "mt-result wrong";
+                resultEl.innerHTML = `틀렸습니다 😢<br>정답: ${currentNumber}<br>도달 레벨: ${level}&nbsp; / &nbsp;최고 레벨: ${bestLevel}`;
+                level = 1;
+                numberBox.textContent = "GAME OVER";
+                startBtn.textContent = "다시 시작";
+            }
+
+            startBtn.disabled = false;
+            submitBtn.disabled = true;
+            answerInput.disabled = true;
+        }
+
+        function generateNumber(length) {
+            let num = "";
+            for (let i = 0; i < length; i++) num += Math.floor(Math.random() * 10);
+            return num;
+        }
+    </script>
+
+</body>
+
+</html>

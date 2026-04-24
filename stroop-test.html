@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>스트룹 테스트 - 브레인 플레이존</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="스트룹 테스트. 글자 뜻이 아닌 글자 색깔을 선택하는 집중력·반응속도 게임!">
+    <meta name="keywords" content="스트룹 테스트, 색깔 반응, 집중력 게임, 두뇌 게임, 무료 게임">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGSGCQ49');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/stroop-test.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGSGCQ49" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🧠 브레인 플레이존</a>
+            <ul class="nav-links">
+                <li><a href="index.html#games">게임</a></li>
+                <li><a href="guide.html">소개</a></li>
+                <li><a href="index.html#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 게임 영역 -->
+    <main class="stroop-test-main">
+        <div class="stroop-test-card">
+            <div class="stroop-test-header">
+                <div class="game-icon">🎨</div>
+                <h1 class="game-title">스트룹 테스트</h1>
+                <p class="game-subtitle">글자 색깔을 선택하세요. 뜻에 속지 마세요!</p>
+            </div>
+
+            <div class="stroop-test-body">
+                <div class="st-info">
+                    <div class="st-info-item">
+                        <div class="st-info-label">남은 시간</div>
+                        <div class="st-info-value" id="st-time">30</div>
+                    </div>
+                    <div class="st-info-item">
+                        <div class="st-info-label">점수</div>
+                        <div class="st-info-value" id="st-score">0</div>
+                    </div>
+                </div>
+
+                <div class="st-word-box" id="st-wordBox">READY</div>
+
+                <div class="st-options">
+                    <button class="st-color-btn st-btn-red" onclick="selectColor('red')" id="btn-red">빨강</button>
+                    <button class="st-color-btn st-btn-blue" onclick="selectColor('blue')" id="btn-blue">파랑</button>
+                    <button class="st-color-btn st-btn-green" onclick="selectColor('green')" id="btn-green">초록</button>
+                    <button class="st-color-btn st-btn-yellow" onclick="selectColor('yellow')" id="btn-yellow">노랑</button>
+                </div>
+
+                <button class="st-start-btn" id="st-startBtn" onclick="startGame()">게임 시작</button>
+
+                <div class="st-result" id="st-result"></div>
+
+                <a href="index.html" class="back-link">← 게임 목록으로 돌아가기</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="index.html">스도쿠</a></li>
+                    <li><a href="index.html">2048</a></li>
+                    <li><a href="reaction-test.html">반응속도 테스트</a></li>
+                    <li><a href="roulette.html">커스텀 룰렛</a></li>
+                    <li><a href="balance-game.html">밸런스 게임</a></li>
+                    <li><a href="card-memory.html">카드 뒤집기</a></li>
+                    <li><a href="click-speed.html">10초 연타</a></li>
+                    <li><a href="memory-test.html">기억력 테스트</a></li>
+                    <li><a href="stroop-test.html">스트룹 테스트</a></li>
+                    <li><a href="timing-game.html">타이밍 맞추기</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="index.html#ranking">랭킹</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                    <li><a href="https://open.kakao.com/o/sORt2goi">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const wordBox = document.getElementById("st-wordBox");
+        const timeEl = document.getElementById("st-time");
+        const scoreEl = document.getElementById("st-score");
+        const resultEl = document.getElementById("st-result");
+        const startBtn = document.getElementById("st-startBtn");
+        const colorBtns = document.querySelectorAll(".st-color-btn");
+
+        const colorList = [
+            { name: "red",    text: "빨강", css: "#ff4d4d" },
+            { name: "blue",   text: "파랑", css: "#4f7cff" },
+            { name: "green",  text: "초록", css: "#32d17d" },
+            { name: "yellow", text: "노랑", css: "#ffd43b" }
+        ];
+
+        let correctColor = "";
+        let score = 0;
+        let timeLeft = 30;
+        let playing = false;
+        let timer = null;
+        let bestScore = Number(localStorage.getItem("stroopBestScore")) || 0;
+
+        setColorBtnsDisabled(true);
+
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            playing = true;
+
+            scoreEl.textContent = 0;
+            timeEl.textContent = 30;
+            resultEl.style.display = "none";
+            startBtn.disabled = true;
+            setColorBtnsDisabled(false);
+
+            nextQuestion();
+
+            timer = setInterval(() => {
+                timeLeft--;
+                timeEl.textContent = timeLeft;
+                if (timeLeft <= 0) endGame();
+            }, 1000);
+        }
+
+        function nextQuestion() {
+            const word  = colorList[Math.floor(Math.random() * colorList.length)];
+            const color = colorList[Math.floor(Math.random() * colorList.length)];
+            correctColor = color.name;
+            wordBox.textContent = word.text;
+            wordBox.style.color = color.css;
+        }
+
+        function selectColor(colorName) {
+            if (!playing) return;
+            if (colorName === correctColor) {
+                score++;
+                scoreEl.textContent = score;
+                nextQuestion();
+            } else {
+                score = Math.max(0, score - 1);
+                scoreEl.textContent = score;
+                const prev = wordBox.style.color;
+                wordBox.textContent = "틀림!";
+                wordBox.style.color = "#ef476f";
+                setTimeout(() => { wordBox.style.color = prev; nextQuestion(); }, 350);
+            }
+        }
+
+        function endGame() {
+            clearInterval(timer);
+            playing = false;
+            startBtn.disabled = false;
+            setColorBtnsDisabled(true);
+
+            if (score > bestScore) {
+                bestScore = score;
+                localStorage.setItem("stroopBestScore", bestScore);
+            }
+
+            wordBox.textContent = "FINISH";
+            wordBox.style.color = "#fff";
+
+            resultEl.style.display = "block";
+            resultEl.innerHTML =
+                `최종 점수: <strong>${score}</strong>점 &nbsp;|&nbsp; ` +
+                `최고 점수: <strong>${bestScore}</strong>점<br>${getGrade(score)}`;
+        }
+
+        function getGrade(s) {
+            if (s >= 35) return "등급: 초고속 두뇌 반응 🧠🔥";
+            if (s >= 25) return "등급: 집중력 우수 👍";
+            if (s >= 15) return "등급: 평균 이상 🙂";
+            return "등급: 연습이 필요해요 💪";
+        }
+
+        function setColorBtnsDisabled(disabled) {
+            colorBtns.forEach(btn => btn.disabled = disabled);
+        }
+    </script>
+
+</body>
+
+</html>

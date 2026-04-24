@@ -1,0 +1,129 @@
+/* ================================
+   Timing Game - Layout
+   ================================ */
+.timing-game-main {
+    min-height: calc(100vh - 80px);
+    background: var(--light);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.timing-game-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 460px;
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.timing-game-header {
+    padding: 2rem 2rem 1.75rem;
+    background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+    color: white;
+    text-align: center;
+}
+
+.timing-game-header .game-icon { font-size: 3rem; margin-bottom: 0.4rem; }
+.timing-game-header .game-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 0.4rem; }
+.timing-game-header .game-subtitle { font-size: 0.95rem; opacity: 0.9; }
+
+.timing-game-body { padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ================================
+   Bar & Pointer
+   ================================ */
+.tg-bar-box {
+    width: 100%;
+    height: 48px;
+    background: #dde3ee;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tg-target {
+    position: absolute;
+    left: 45%;
+    width: 10%;
+    height: 100%;
+    background: var(--success);
+    opacity: 0.85;
+}
+
+.tg-pointer {
+    position: absolute;
+    width: 14px;
+    height: 100%;
+    background: var(--dark);
+    left: 0;
+    top: 0;
+    border-radius: 4px;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+.tg-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: white;
+}
+
+.tg-start-btn { background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%); }
+.tg-start-btn:hover:not(:disabled) { opacity: 0.9; transform: scale(1.02); }
+.tg-stop-btn { background: var(--danger); }
+.tg-stop-btn:hover:not(:disabled) { background: #d43060; transform: scale(1.02); }
+.tg-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* ================================
+   Result
+   ================================ */
+.tg-result {
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 900;
+    display: none;
+    line-height: 1.7;
+    animation: scaleIn 0.3s ease-out;
+}
+
+.tg-result.perfect { background: #f0fff8; color: var(--success); border: 2px solid var(--success); }
+.tg-result.great   { background: #e8f4ff; color: #0077b6; border: 2px solid #0077b6; }
+.tg-result.good    { background: #fff9e6; color: #c9a200; border: 2px solid #c9a200; }
+.tg-result.fail    { background: #fff0f3; color: var(--danger); border: 2px solid var(--danger); }
+
+header .logo { text-decoration: none; color: white; }
+
+.back-link {
+    display: block;
+    text-align: center;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding-top: 0.25rem;
+    transition: color 0.2s;
+}
+.back-link:hover { color: var(--primary-dark); text-decoration: underline; }
+
+/* ================================
+   Responsive
+   ================================ */
+@media (max-width: 480px) {
+    .timing-game-main { padding: 1.5rem 0.75rem 3rem; }
+    .timing-game-body { padding: 1.25rem 1rem; }
+    .tg-bar-box { height: 38px; }
+}

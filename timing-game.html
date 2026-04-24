@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>타이밍 맞추기 - 브레인 플레이존</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이밍 맞추기 게임. 움직이는 바가 초록색 영역에 들어왔을 때 멈추세요!">
+    <meta name="keywords" content="타이밍 게임, 순발력 게임, 두뇌 게임, 무료 게임, 반응속도">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGSGCQ49');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/timing-game.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGSGCQ49" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🧠 브레인 플레이존</a>
+            <ul class="nav-links">
+                <li><a href="index.html#games">게임</a></li>
+                <li><a href="guide.html">소개</a></li>
+                <li><a href="index.html#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 게임 영역 -->
+    <main class="timing-game-main">
+        <div class="timing-game-card">
+            <div class="timing-game-header">
+                <div class="game-icon">🎯</div>
+                <h1 class="game-title">타이밍 맞추기</h1>
+                <p class="game-subtitle">초록 영역에 바가 들어왔을 때 멈추세요!</p>
+            </div>
+
+            <div class="timing-game-body">
+                <div class="tg-bar-box">
+                    <div class="tg-target"></div>
+                    <div class="tg-pointer" id="tg-pointer"></div>
+                </div>
+
+                <button class="tg-btn tg-start-btn" id="tg-startBtn">시작</button>
+                <button class="tg-btn tg-stop-btn" id="tg-stopBtn" disabled>멈추기!</button>
+
+                <div class="tg-result" id="tg-result"></div>
+
+                <a href="index.html" class="back-link">← 게임 목록으로 돌아가기</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="index.html">스도쿠</a></li>
+                    <li><a href="index.html">2048</a></li>
+                    <li><a href="reaction-test.html">반응속도 테스트</a></li>
+                    <li><a href="roulette.html">커스텀 룰렛</a></li>
+                    <li><a href="balance-game.html">밸런스 게임</a></li>
+                    <li><a href="card-memory.html">카드 뒤집기</a></li>
+                    <li><a href="click-speed.html">10초 연타</a></li>
+                    <li><a href="memory-test.html">기억력 테스트</a></li>
+                    <li><a href="stroop-test.html">스트룹 테스트</a></li>
+                    <li><a href="timing-game.html">타이밍 맞추기</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="index.html#ranking">랭킹</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                    <li><a href="https://open.kakao.com/o/sORt2goi">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const pointer = document.getElementById("tg-pointer");
+        const resultEl = document.getElementById("tg-result");
+        const startBtn = document.getElementById("tg-startBtn");
+        const stopBtn = document.getElementById("tg-stopBtn");
+
+        let position = 0;
+        let direction = 1;
+        const speed = 2.4;
+        let animationId = null;
+        let playing = false;
+        let bestScore = Number(localStorage.getItem("timingBestScore")) || 0;
+
+        startBtn.addEventListener("click", startGame);
+        stopBtn.addEventListener("click", stopGame);
+
+        function startGame() {
+            position = 0;
+            direction = 1;
+            playing = true;
+
+            resultEl.style.display = "none";
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+
+            animate();
+        }
+
+        function animate() {
+            if (!playing) return;
+
+            position += speed * direction;
+
+            if (position >= 100) { position = 100; direction = -1; }
+            if (position <= 0)   { position = 0;   direction = 1; }
+
+            pointer.style.left = `calc(${position}% - 7px)`;
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function stopGame() {
+            playing = false;
+            cancelAnimationFrame(animationId);
+
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+
+            /* target zone: left 45% ~ 55% of the bar */
+            const targetLeft  = 45;
+            const targetRight = 55;
+            const center = (targetLeft + targetRight) / 2;
+            const distance = Math.abs(position - center);
+
+            let grade, score, cls;
+
+            if (distance <= 2) {
+                grade = "PERFECT! 🎯"; score = 100; cls = "perfect";
+            } else if (distance <= 5) {
+                grade = "GREAT! 👍";   score = 80;  cls = "great";
+            } else if (distance <= 10) {
+                grade = "GOOD! 🙂";   score = 50;  cls = "good";
+            } else {
+                grade = "MISS! 😅";    score = 10;  cls = "fail";
+            }
+
+            if (score > bestScore) {
+                bestScore = score;
+                localStorage.setItem("timingBestScore", bestScore);
+            }
+
+            resultEl.className = `tg-result ${cls}`;
+            resultEl.style.display = "block";
+            resultEl.innerHTML =
+                `${grade}<br>` +
+                `이번 점수: <strong>${score}</strong>점 &nbsp;|&nbsp; ` +
+                `최고 점수: <strong>${bestScore}</strong>점`;
+        }
+    </script>
+
+</body>
+
+</html>

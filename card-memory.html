@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>카드 뒤집기 게임 - 브레인 플레이존</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="카드 뒤집기 기억력 게임. 같은 그림 카드 2장을 찾아 맞추세요. 무료 두뇌 트레이닝!">
+    <meta name="keywords" content="카드 뒤집기, 기억력 게임, 짝 맞추기, 두뇌 게임, 무료 게임">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGSGCQ49');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/card-memory.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGSGCQ49" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🧠 브레인 플레이존</a>
+            <ul class="nav-links">
+                <li><a href="index.html#games">게임</a></li>
+                <li><a href="guide.html">소개</a></li>
+                <li><a href="index.html#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 게임 영역 -->
+    <main class="card-memory-main">
+        <div class="card-memory-card">
+            <div class="card-memory-header">
+                <div class="game-icon">🧩</div>
+                <h1 class="game-title">카드 뒤집기</h1>
+                <p class="game-subtitle">같은 그림 카드 2장을 찾아보세요!</p>
+            </div>
+
+            <div class="card-memory-body">
+                <div class="cm-info">
+                    <div class="cm-info-item">
+                        <div class="cm-info-label">이동</div>
+                        <div class="cm-info-value" id="cm-moves">0</div>
+                    </div>
+                    <div class="cm-info-item">
+                        <div class="cm-info-label">시간</div>
+                        <div class="cm-info-value" id="cm-time">0초</div>
+                    </div>
+                    <div class="cm-info-item">
+                        <div class="cm-info-label">최고기록</div>
+                        <div class="cm-info-value" id="cm-best">-</div>
+                    </div>
+                </div>
+
+                <div class="cm-grid" id="cm-grid"></div>
+
+                <div class="cm-result" id="cm-result"></div>
+
+                <button class="cm-restart-btn" onclick="startGame()">다시 시작</button>
+
+                <a href="index.html" class="back-link">← 게임 목록으로 돌아가기</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="index.html">스도쿠</a></li>
+                    <li><a href="index.html">2048</a></li>
+                    <li><a href="reaction-test.html">반응속도 테스트</a></li>
+                    <li><a href="roulette.html">커스텀 룰렛</a></li>
+                    <li><a href="balance-game.html">밸런스 게임</a></li>
+                    <li><a href="card-memory.html">카드 뒤집기</a></li>
+                    <li><a href="click-speed.html">10초 연타</a></li>
+                    <li><a href="memory-test.html">기억력 테스트</a></li>
+                    <li><a href="stroop-test.html">스트룹 테스트</a></li>
+                    <li><a href="timing-game.html">타이밍 맞추기</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="index.html#ranking">랭킹</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                    <li><a href="https://open.kakao.com/o/sORt2goi">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const gridEl = document.getElementById("cm-grid");
+        const movesEl = document.getElementById("cm-moves");
+        const timeEl = document.getElementById("cm-time");
+        const bestEl = document.getElementById("cm-best");
+        const resultEl = document.getElementById("cm-result");
+
+        const icons = ["🍎", "🍌", "🍇", "🍓", "🍒", "🥝", "🍍", "🥥"];
+
+        let cards = [];
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let moves = 0;
+        let matchedCount = 0;
+        let elapsed = 0;
+        let timer = null;
+        let gameStarted = false;
+        let bestRecord = localStorage.getItem("cardMemoryBest");
+
+        if (bestRecord) bestEl.textContent = bestRecord + "초";
+
+        function startGame() {
+            clearInterval(timer);
+
+            cards = [...icons, ...icons].sort(() => Math.random() - 0.5);
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+            moves = 0;
+            matchedCount = 0;
+            elapsed = 0;
+            gameStarted = false;
+
+            movesEl.textContent = 0;
+            timeEl.textContent = "0초";
+            resultEl.style.display = "none";
+            resultEl.textContent = "";
+
+            gridEl.innerHTML = "";
+
+            cards.forEach((icon, index) => {
+                const cell = document.createElement("div");
+                cell.className = "cm-cell";
+                cell.dataset.icon = icon;
+                cell.dataset.index = index;
+                cell.innerHTML = `
+                    <div class="cm-cell-inner">
+                        <div class="cm-front">?</div>
+                        <div class="cm-back">${icon}</div>
+                    </div>`;
+                cell.addEventListener("click", () => flipCard(cell));
+                gridEl.appendChild(cell);
+            });
+        }
+
+        function flipCard(cell) {
+            if (lockBoard) return;
+            if (cell.classList.contains("open")) return;
+            if (cell.classList.contains("matched")) return;
+
+            if (!gameStarted) {
+                gameStarted = true;
+                timer = setInterval(() => {
+                    elapsed++;
+                    timeEl.textContent = elapsed + "초";
+                }, 1000);
+            }
+
+            cell.classList.add("open");
+
+            if (!firstCard) {
+                firstCard = cell;
+                return;
+            }
+
+            secondCard = cell;
+            moves++;
+            movesEl.textContent = moves;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (firstCard.dataset.icon === secondCard.dataset.icon) {
+                firstCard.classList.add("matched");
+                secondCard.classList.add("matched");
+                firstCard = null;
+                secondCard = null;
+                matchedCount += 2;
+                if (matchedCount === cards.length) endGame();
+            } else {
+                lockBoard = true;
+                setTimeout(() => {
+                    firstCard.classList.remove("open");
+                    secondCard.classList.remove("open");
+                    firstCard = null;
+                    secondCard = null;
+                    lockBoard = false;
+                }, 800);
+            }
+        }
+
+        function endGame() {
+            clearInterval(timer);
+            if (!bestRecord || elapsed < Number(bestRecord)) {
+                bestRecord = elapsed;
+                localStorage.setItem("cardMemoryBest", bestRecord);
+                bestEl.textContent = bestRecord + "초";
+            }
+            resultEl.style.display = "block";
+            resultEl.innerHTML = `🎉 성공!&nbsp; ${elapsed}초 / ${moves}회 이동`;
+        }
+
+        startGame();
+    </script>
+
+</body>
+
+</html>

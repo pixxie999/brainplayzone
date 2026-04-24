@@ -199,6 +199,22 @@ nav {
     animation-delay: 0.5s;
 }
 
+.game-card:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.game-card:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+.game-card:nth-child(9) {
+    animation-delay: 0.8s;
+}
+
+.game-card:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
 .game-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
@@ -212,13 +228,32 @@ nav {
 }
 
 .game-card:nth-child(2) .game-header,
-.game-card:nth-child(4) .game-header,
-.game-card:nth-child(6) .game-header {
+.game-card:nth-child(4) .game-header {
     background: var(--gradient-2);
 }
 
 .game-card:nth-child(5) .game-header {
     background: linear-gradient(135deg, #5f27cd 0%, #EF476F 100%);
+}
+
+.game-card:nth-child(6) .game-header {
+    background: linear-gradient(135deg, #06D6A0 0%, #004E89 100%);
+}
+
+.game-card:nth-child(7) .game-header {
+    background: linear-gradient(135deg, #EF476F 0%, #FF6B35 100%);
+}
+
+.game-card:nth-child(8) .game-header {
+    background: linear-gradient(135deg, #5f27cd 0%, #a29bfe 100%);
+}
+
+.game-card:nth-child(9) .game-header {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd43b 100%);
+}
+
+.game-card:nth-child(10) .game-header {
+    background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
 }
 
 .game-icon {
