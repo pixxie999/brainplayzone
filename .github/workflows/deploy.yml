@@ -1,4 +1,4 @@
-name: Deploy to Cloudways
+name: Deploy to Cloudflare Pages
 
 on:
   push:
@@ -7,25 +7,19 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
 
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            git config --global --add safe.directory ${{ secrets.DEPLOY_PATH }}
-            cd ${{ secrets.DEPLOY_PATH }}
-            git init
-            git remote remove origin 2>/dev/null || true
-            git remote add origin "https://pixxie999:${{ secrets.GH_TOKEN }}@github.com/pixxie999/brainplayzone.git"
-            git fetch origin main
-            git reset --hard origin/main
-            # Varnish 캐시 퍼지
-            curl -s -X PURGE http://localhost/ 2>/dev/null || true
-            curl -s -X PURGE http://localhost/guide.html 2>/dev/null || true
-            # Nginx 캐시 디렉토리 초기화 (있는 경우)
-            find /var/cache/nginx -type f -delete 2>/dev/null || true
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: brainplayzone
+          directory: .
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

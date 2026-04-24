@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>밸런스 게임 - 브레인 플레이존</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="500가지 밸런스 게임 질문! A와 B 중 하나를 선택하세요. 매번 다른 질문이 랜덤으로 나와요.">
+    <meta name="keywords" content="밸런스 게임, 이거 아니면 저거, 선택 게임, 두뇌 게임, 무료 게임">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGSGCQ49');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/balance-game.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGSGCQ49" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🧠 브레인 플레이존</a>
+            <ul class="nav-links">
+                <li><a href="index.html#games">게임</a></li>
+                <li><a href="guide.html">소개</a></li>
+                <li><a href="index.html#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 게임 영역 -->
+    <main class="balance-main">
+        <div class="balance-card">
+            <div class="balance-header">
+                <div class="game-icon">⚖️</div>
+                <h1 class="game-title">밸런스 게임</h1>
+                <p class="game-subtitle">둘 중 하나만 골라야 한다면?</p>
+            </div>
+
+            <div class="balance-body">
+
+                <!-- 진행 상태 -->
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="currentNum">1</span> / <span id="totalNum">500</span>번째 질문
+                </div>
+
+                <!-- 질문 카드 -->
+                <div class="question-area" id="questionArea">
+                    <div class="question-text" id="questionText">둘 중 하나를 선택하세요!</div>
+                </div>
+
+                <!-- 선택 버튼 -->
+                <div class="choice-wrap">
+                    <button class="choice-btn choice-a" id="btnA" onclick="choose('a')">
+                        <span class="choice-label">A</span>
+                        <span class="choice-text" id="textA"></span>
+                    </button>
+
+                    <div class="vs-badge">VS</div>
+
+                    <button class="choice-btn choice-b" id="btnB" onclick="choose('b')">
+                        <span class="choice-label">B</span>
+                        <span class="choice-text" id="textB"></span>
+                    </button>
+                </div>
+
+                <!-- 결과 / 다음 -->
+                <div class="result-area" id="resultArea" style="display:none;">
+                    <div class="result-message" id="resultMessage"></div>
+                    <button class="btn-next" id="btnNext" onclick="nextQuestion()">다음 질문 →</button>
+                </div>
+
+                <!-- 액션 버튼 -->
+                <div class="action-row">
+                    <button class="btn-skip" onclick="skipQuestion()">건너뛰기</button>
+                    <button class="btn-restart" onclick="restartGame()">🔀 새로 시작</button>
+                </div>
+
+                <a href="index.html" class="back-link">← 게임 목록으로 돌아가기</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="index.html#games">스도쿠</a></li>
+                    <li><a href="index.html#games">2048</a></li>
+                    <li><a href="reaction-test.html">반응속도 테스트</a></li>
+                    <li><a href="roulette.html">커스텀 룰렛</a></li>
+                    <li><a href="balance-game.html">밸런스 게임</a></li>
+                    <li><a href="#">넌그램 (출시 예정)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="index.html#ranking">랭킹</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                    <li><a href="https://open.kakao.com/o/sORt2goi">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- 질문 데이터 import -->
+    <script src="js/balance-questions.js"></script>
+    <script>
+        let queue = [];
+        let currentIndex = 0;
+        let answered = false;
+
+        const SESSION_SIZE = 50;
+
+        function initGame() {
+            queue = shuffleQuestions(BALANCE_QUESTIONS).slice(0, SESSION_SIZE);
+            currentIndex = 0;
+            answered = false;
+            document.getElementById("totalNum").textContent = SESSION_SIZE;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = queue[currentIndex];
+            answered = false;
+
+            document.getElementById("currentNum").textContent = currentIndex + 1;
+            document.getElementById("questionText").textContent = "둘 중 하나를 골라야 한다면?";
+            document.getElementById("textA").textContent = q.a;
+            document.getElementById("textB").textContent = q.b;
+
+            // 진행 바
+            const pct = ((currentIndex) / queue.length) * 100;
+            document.getElementById("progressBar").style.width = pct + "%";
+
+            // 버튼 초기화
+            const btnA = document.getElementById("btnA");
+            const btnB = document.getElementById("btnB");
+            btnA.classList.remove("selected", "dimmed");
+            btnB.classList.remove("selected", "dimmed");
+            btnA.disabled = false;
+            btnB.disabled = false;
+
+            // 결과 영역 숨기기
+            document.getElementById("resultArea").style.display = "none";
+        }
+
+        function choose(side) {
+            if (answered) return;
+            answered = true;
+
+            const q = queue[currentIndex];
+            const chosen = side === "a" ? q.a : q.b;
+            const btnA = document.getElementById("btnA");
+            const btnB = document.getElementById("btnB");
+
+            if (side === "a") {
+                btnA.classList.add("selected");
+                btnB.classList.add("dimmed");
+            } else {
+                btnB.classList.add("selected");
+                btnA.classList.add("dimmed");
+            }
+
+            btnA.disabled = true;
+            btnB.disabled = true;
+
+            const messages = [
+                `"${chosen}" 선택! 확고한 취향이네요 😎`,
+                `역시 "${chosen}"! 좋은 선택입니다 👍`,
+                `"${chosen}"을(를) 골랐군요! 납득이 되네요 🤔`,
+                `"${chosen}" 선택! 이유가 궁금한데요? 😄`,
+                `오 "${chosen}"! 의외의 선택이네요 😲`,
+                `"${chosen}" 선택 완료! 다음 질문 보러 가요 🚀`,
+            ];
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+
+            const resultArea = document.getElementById("resultArea");
+            document.getElementById("resultMessage").textContent = msg;
+            resultArea.style.display = "flex";
+
+            if (currentIndex >= queue.length - 1) {
+                document.getElementById("btnNext").textContent = "처음부터 다시 🔀";
+            } else {
+                document.getElementById("btnNext").textContent = "다음 질문 →";
+            }
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex >= queue.length) {
+                restartGame();
+            } else {
+                loadQuestion();
+            }
+        }
+
+        function skipQuestion() {
+            if (currentIndex < queue.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            }
+        }
+
+        function restartGame() {
+            initGame();
+        }
+
+        initGame();
+    </script>
+
+</body>
+
+</html>

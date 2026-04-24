@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>커스텀 룰렛 - 브레인 플레이존</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="항목을 직접 입력하고 돌리는 커스텀 룰렛 게임. 오늘 점심 메뉴도 룰렛에 맡겨보세요!">
+    <meta name="keywords" content="룰렛, 커스텀 룰렛, 랜덤 결정, 두뇌 게임, 무료 게임">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Righteous&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGSGCQ49');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/roulette.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGSGCQ49" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🧠 브레인 플레이존</a>
+            <ul class="nav-links">
+                <li><a href="index.html#games">게임</a></li>
+                <li><a href="guide.html">소개</a></li>
+                <li><a href="index.html#ranking">랭킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 게임 영역 -->
+    <main class="roulette-main">
+        <div class="roulette-card">
+            <div class="roulette-header">
+                <div class="game-icon">🎯</div>
+                <h1 class="game-title">커스텀 룰렛</h1>
+                <p class="game-subtitle">항목을 입력하고 룰렛을 돌려보세요!</p>
+            </div>
+
+            <div class="roulette-body">
+
+                <!-- 항목 입력 -->
+                <div class="input-section">
+                    <label class="input-label">항목 입력 <span>(한 줄에 하나씩)</span></label>
+                    <textarea id="input" class="roulette-textarea">치킨
+피자
+햄버거
+라면
+돈까스
+굶기</textarea>
+                    <button class="btn-create" onclick="createRoulette()">룰렛 생성</button>
+                </div>
+
+                <!-- 룰렛 -->
+                <div class="roulette-wrap">
+                    <div class="pointer"></div>
+                    <canvas id="canvas" width="300" height="300"></canvas>
+                </div>
+
+                <!-- 결과 -->
+                <div class="result-box" id="resultBox" style="display:none;">
+                    <div class="result-label">결과</div>
+                    <div class="result-value" id="result"></div>
+                </div>
+
+                <!-- 돌리기 버튼 -->
+                <button class="btn-spin" id="spinBtn" onclick="spin()">🎲 돌리기</button>
+
+                <a href="index.html" class="back-link">← 게임 목록으로 돌아가기</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>브레인 플레이존</h3>
+                <p>무료 두뇌 게임으로<br>매일 즐겁게 트레이닝하세요</p>
+            </div>
+            <div class="footer-section">
+                <h3>게임</h3>
+                <ul>
+                    <li><a href="index.html#games">스도쿠</a></li>
+                    <li><a href="index.html#games">2048</a></li>
+                    <li><a href="reaction-test.html">반응속도 테스트</a></li>
+                    <li><a href="roulette.html">커스텀 룰렛</a></li>
+                    <li><a href="balance-game.html">밸런스 게임</a></li>
+                    <li><a href="#">넌그램 (출시 예정)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>정보</h3>
+                <ul>
+                    <li><a href="guide.html">게임 소개</a></li>
+                    <li><a href="index.html#ranking">랭킹</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                    <li><a href="https://open.kakao.com/o/sORt2goi">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 브레인 플레이존. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spinBtn");
+        const resultBox = document.getElementById("resultBox");
+        const resultEl = document.getElementById("result");
+
+        let items = [];
+        let currentRotation = 0;
+        let spinning = false;
+
+        const COLORS = [
+            "#FF6B35", "#FFD23F", "#06D6A0", "#EF476F",
+            "#004E89", "#FF9F43", "#48dbfb", "#a29bfe"
+        ];
+
+        function getColor(i) {
+            return COLORS[i % COLORS.length];
+        }
+
+        function createRoulette() {
+            const input = document.getElementById("input").value;
+            items = input.split("\n").map(v => v.trim()).filter(v => v);
+
+            if (items.length < 2) {
+                alert("최소 2개 이상 입력하세요");
+                return;
+            }
+
+            currentRotation = 0;
+            canvas.style.transform = "rotate(0deg)";
+            resultBox.style.display = "none";
+            draw();
+        }
+
+        function draw(rotationDeg) {
+            const size = canvas.width;
+            const cx = size / 2;
+            const cy = size / 2;
+            const r = cx - 4;
+            const arc = (Math.PI * 2) / items.length;
+
+            ctx.clearRect(0, 0, size, size);
+
+            for (let i = 0; i < items.length; i++) {
+                const start = i * arc;
+
+                ctx.beginPath();
+                ctx.fillStyle = getColor(i);
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r, start, start + arc);
+                ctx.fill();
+
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(start + arc / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "rgba(0,0,0,0.75)";
+                ctx.font = `bold ${Math.max(11, Math.min(15, Math.floor(280 / items.length)))}px 'Noto Sans KR', Arial`;
+                ctx.fillText(items[i], r - 10, 5);
+                ctx.restore();
+            }
+
+            // 중심 원
+            ctx.beginPath();
+            ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+            ctx.fillStyle = "white";
+            ctx.fill();
+            ctx.strokeStyle = "#ddd";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function spin() {
+            if (spinning || items.length === 0) return;
+
+            spinning = true;
+            spinBtn.disabled = true;
+            resultBox.style.display = "none";
+
+            const randomIndex = Math.floor(Math.random() * items.length);
+            const arc = 360 / items.length;
+
+            // 캔버스는 3시(0°)에서 시작, 포인터는 12시(270°) 위치
+            // sectorCenter + currentRotation + additional ≡ 270° (mod 360°)
+            const sectorCenter = randomIndex * arc + arc / 2;
+            const remainder = ((270 - sectorCenter - currentRotation) % 360 + 360) % 360;
+            const additionalRotation = 360 * 6 + remainder;
+            const targetRotation = currentRotation + additionalRotation;
+
+            let start = null;
+            const duration = 4000;
+
+            function animate(timestamp) {
+                if (!start) start = timestamp;
+                const progress = Math.min((timestamp - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+
+                canvas.style.transform = `rotate(${currentRotation + additionalRotation * ease}deg)`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    currentRotation = targetRotation;
+                    resultEl.textContent = items[randomIndex];
+                    resultBox.style.display = "block";
+                    spinning = false;
+                    spinBtn.disabled = false;
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // 반응형 캔버스 크기 조정
+        function resizeCanvas() {
+            const maxSize = Math.min(window.innerWidth - 80, 300);
+            canvas.width = maxSize;
+            canvas.height = maxSize;
+            canvas.style.width = maxSize + "px";
+            canvas.style.height = maxSize + "px";
+            document.querySelector(".roulette-wrap").style.width = maxSize + "px";
+            document.querySelector(".roulette-wrap").style.height = (maxSize + 16) + "px";
+            if (items.length > 0) draw();
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+        createRoulette();
+    </script>
+
+</body>
+
+</html>
